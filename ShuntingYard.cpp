@@ -14,6 +14,26 @@ Expression shunting_yard(const Expression expression)
   for (const Token& token : expression.get_tokens())
   {
     out_queue.push(token);
+
+    if (token.is_number())
+    {
+      std::cout << token.to_string() << " is a number\n";
+    }
+
+    else if (token.is_operator())
+    {
+      std::cout << token.to_string() << " is an operator\n";
+    }
+
+    else if (token.is_opening_bracket())
+    {
+      std::cout << token.to_string() << " is a left bracket\n";
+    }
+
+    else if (token.is_closing_bracket())
+    {
+      std::cout << token.to_string() << " is a right bracket\n";
+    }
   }
 
   return Expression(out_queue);
