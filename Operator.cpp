@@ -82,6 +82,15 @@ int Operator::get_precedence() const
   return characteristics.precedence;
 }
 
+bool Operator::is_left_bracket() const
+{
+  return false;
+}
+bool Operator::is_right_bracket() const
+{
+  return false;
+}
+
 bool operator==(const Operator& operator1, const Operator& operator2)
 {
   return operator1.get_precedence() == operator2.get_precedence();

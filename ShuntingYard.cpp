@@ -9,12 +9,12 @@
 
 Expression shunting_yard(const Expression expression)
 {
-  std::queue<Token> out_queue;
-  std::stack<Token> opr_stack;
+  std::queue<Token> output_queue;
+  std::stack<Operator> operator_stack;
 
   for (const Token& token : expression.get_tokens())
   {
-    out_queue.push(token);
+    output_queue.push(token);
 
     if (token.is_number())
     {
@@ -24,7 +24,18 @@ Expression shunting_yard(const Expression expression)
     else if (Operator::is_operator(token))
     {
       const Operator operator_(token);
-      std::cout << operator_.to_string() << " is an operator\n";
+      if (!operator_stack.empty())
+      {
+        const Operator stack_operator = operator_stack.top();
+        while (stack_operator > operator_
+           || ((stack_operator == operator_ && stack_operator.is_left_associative())
+           && (!stack_operator.is_left_bracket())))
+        {
+          output_queue.push(stack_operator);
+          operator_stack.pop();
+        }
+      }
+      operator_stack.push(operator_);
     }
 
     else if (token.is_opening_bracket())
@@ -38,5 +49,5 @@ Expression shunting_yard(const Expression expression)
     }
   }
 
-  return Expression(out_queue);
+  return Expression(output_queue);
 }
