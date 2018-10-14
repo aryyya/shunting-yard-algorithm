@@ -5,12 +5,25 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <queue>
 
 std::vector<Token> tokenize(const std::string& expression);
 
 Expression::Expression(const std::string& expression)
 {
   tokens = tokenize(expression);
+}
+
+Expression::Expression(std::queue<Token>& expression)
+{
+  std::string expression_string = "";
+  while (!expression.empty())
+  {
+    const Token token = expression.front();
+    expression.pop();
+    expression_string += token.to_string() + " ";
+  }
+  tokens = tokenize(expression_string);
 }
 
 std::string Expression::to_string() const
@@ -33,14 +46,9 @@ double Expression::solve() const
   return 0.0;
 }
 
-int Expression::get_tokens_length() const
+const std::vector<Token>& Expression::get_tokens() const
 {
-  return tokens.size();
-}
-
-const Token& Expression::get_token(const int index) const
-{
-  return tokens[index];
+  return tokens;
 }
 
 std::vector<Token> tokenize(const std::string& expression)
