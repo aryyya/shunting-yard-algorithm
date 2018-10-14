@@ -9,6 +9,7 @@ private:
 
 public:
   Token(const std::string& symbols);
+  Token(const Token& token);
   const std::string& to_string() const;
   bool is_operator() const;
   bool is_number() const;

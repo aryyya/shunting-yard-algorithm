@@ -23,7 +23,8 @@ Expression shunting_yard(const Expression expression)
 
     else if (Operator::is_operator(token))
     {
-      std::cout << token.to_string() << " is an operator\n";
+      const Operator operator_(token);
+      std::cout << operator_.to_string() << " is an operator\n";
     }
 
     else if (token.is_opening_bracket())

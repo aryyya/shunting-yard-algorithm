@@ -16,7 +16,7 @@ struct OperatorCharacteristics
   OperatorAssociativity associativity;
 };
 
-class Operator
+class Operator : public Token
 {
 private:
   OperatorCharacteristics characteristics;

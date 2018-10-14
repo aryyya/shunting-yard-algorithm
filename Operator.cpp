@@ -49,9 +49,9 @@ const std::map<
   }
 };
 
-Operator::Operator(const Token& token)
+Operator::Operator(const Token& token) : Token(token)
 {
-  characteristics = operators.at(token.to_string());
+  characteristics = operators.at(to_string());
 }
 
 bool Operator::is_operator(const Token& token)
