@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <string>
 
+#include "Expression.hpp"
+
 void show_not_enough_arguments_error();
 void show_help();
 void show_version();
@@ -11,8 +13,8 @@ int main(int argc, char *argv[])
 {
   parse_args(argc, argv);
 
-  const std::string expression = argv[1];
-  std::cout << "Expression: " << expression << "\n";
+  Expression expression(argv[1]);
+  std::cout << expression.to_string() << "\n";
 }
 
 void show_not_enough_arguments_error()
