@@ -46,6 +46,22 @@ const std::map<
       precedence: 4,
       associativity: OperatorAssociativity::right
     },
+  },
+  {
+    "(", {
+      symbol: "(",
+      name: "opening bracket",
+      precedence: -1,
+      associativity: OperatorAssociativity::none
+    }
+  },
+  {
+    ")", {
+      symbol: ")",
+      name: "closing bracket",
+      precedence: -1,
+      associativity: OperatorAssociativity::none
+    }
   }
 };
 
@@ -84,11 +100,11 @@ int Operator::get_precedence() const
 
 bool Operator::is_left_bracket() const
 {
-  return false;
+  return characteristics.symbol == "(";
 }
 bool Operator::is_right_bracket() const
 {
-  return false;
+  return characteristics.symbol == ")";
 }
 
 bool operator==(const Operator& operator1, const Operator& operator2)
