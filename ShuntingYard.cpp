@@ -1,6 +1,7 @@
 #include "ShuntingYard.hpp"
 #include "Expression.hpp"
 #include "Token.hpp"
+#include "Operator.hpp"
 
 #include <iostream>
 #include <stack>
@@ -20,7 +21,7 @@ Expression shunting_yard(const Expression expression)
       std::cout << token.to_string() << " is a number\n";
     }
 
-    else if (token.is_operator())
+    else if (Operator::is_operator(token))
     {
       std::cout << token.to_string() << " is an operator\n";
     }
