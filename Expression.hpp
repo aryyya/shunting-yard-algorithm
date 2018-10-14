@@ -13,5 +13,7 @@ private:
 
 public:
   Expression(const std::string& expression);
-  const std::string to_string() const;
+  std::string to_string() const;
+  Expression to_postfix() const;
+  double solve() const;
 };
