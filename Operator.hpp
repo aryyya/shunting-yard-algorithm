@@ -28,3 +28,7 @@ public:
   bool is_right_associative() const;
   int get_precedence() const;
 };
+
+bool operator==(const Operator& operator1, const Operator& operator2);
+bool operator<(const Operator& operator1, const Operator& operator2);
+bool operator>(const Operator& operator1, const Operator& operator2);

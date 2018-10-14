@@ -81,3 +81,18 @@ int Operator::get_precedence() const
 {
   return characteristics.precedence;
 }
+
+bool operator==(const Operator& operator1, const Operator& operator2)
+{
+  return operator1.get_precedence() == operator2.get_precedence();
+}
+
+bool operator<(const Operator& operator1, const Operator& operator2)
+{
+  return operator1.get_precedence() < operator2.get_precedence();
+}
+
+bool operator>(const Operator& operator1, const Operator& operator2)
+{
+  return operator1.get_precedence() > operator2.get_precedence();
+}
