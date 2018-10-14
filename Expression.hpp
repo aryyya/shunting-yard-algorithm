@@ -8,7 +8,6 @@
 class Expression
 {
 private:
-  std::string expression;
   std::vector<Token> tokens;
 
 public:
@@ -16,4 +15,6 @@ public:
   std::string to_string() const;
   Expression to_postfix() const;
   double solve() const;
+  int get_tokens_length() const;
+  const Token& get_token(const int index) const;
 };

@@ -14,7 +14,10 @@ int main(int argc, char *argv[])
   parse_args(argc, argv);
 
   Expression expression(argv[1]);
-  std::cout << expression.to_string() << "\n";
+
+  std::cout << "ifix: " << expression.to_string() << "\n";
+  std::cout << "pfix: " << expression.to_postfix().to_string() << "\n";
+
 }
 
 void show_not_enough_arguments_error()

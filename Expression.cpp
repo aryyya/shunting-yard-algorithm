@@ -1,5 +1,6 @@
 #include "Expression.hpp"
 #include "Token.hpp"
+#include "ShuntingYard.hpp"
 
 #include <string>
 #include <vector>
@@ -9,7 +10,6 @@ std::vector<Token> tokenize(const std::string& expression);
 
 Expression::Expression(const std::string& expression)
 {
-  this->expression = expression;
   tokens = tokenize(expression);
 }
 
@@ -25,12 +25,22 @@ std::string Expression::to_string() const
 
 Expression Expression::to_postfix() const
 {
-  return Expression("");
+  return shunting_yard(Expression(to_string()));
 }
 
 double Expression::solve() const
 {
   return 0.0;
+}
+
+int Expression::get_tokens_length() const
+{
+  return tokens.size();
+}
+
+const Token& Expression::get_token(const int index) const
+{
+  return tokens[index];
 }
 
 std::vector<Token> tokenize(const std::string& expression)
