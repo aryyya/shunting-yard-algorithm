@@ -52,7 +52,7 @@ void show_help()
     << " ( Left Bracket\n"
     << " ) Right Bracket\n"
     << "\n"
-    << "Example:"
+    << "Example:\n"
     << "  sya '1 + 2 * ( 3 / 4 ) ^ 5'\n"
     << "\n";
   std::exit(0);

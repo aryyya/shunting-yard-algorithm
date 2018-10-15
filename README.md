@@ -34,5 +34,17 @@ Supported Operators:
  ( Left Bracket
  ) Right Bracket
 
-Example:  sya '1 + 2 * ( 3 / 4 ) ^ 5'
+Example:
+  sya '1 + 2 * ( 3 / 4 ) ^ 5'
 ```
+
+## Roadmap
+
+- [x] Expression abstraction.
+- [x] Token abstraction.
+- [x] Operator abstraction as subclass of Token.
+- [x] Number abstraction as subclass of Token.
+- [x] Shunting Yard infix to postfix conversion.
+- [ ] Input sanitization and error handler.
+- [ ] Postfix expression solver.
+- [ ] Interactive mode.
