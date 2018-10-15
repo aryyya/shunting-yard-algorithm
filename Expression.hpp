@@ -19,3 +19,5 @@ public:
   double solve() const;
   const std::vector<Token>& get_tokens() const;
 };
+
+std::ostream& operator<<(std::ostream& ostream, const Expression& expression);

@@ -31,11 +31,6 @@ Expression shunting_yard(const Expression& expression)
     {
       handle_operator(token, output_queue, operator_stack);
     }
-
-    std::cout << "token: " << token.to_string() << "\n";
-    print_output_queue(output_queue);
-    print_operator_stack(operator_stack);
-    std::cout << "\n";
   }
 
   while (!operator_stack.empty())

@@ -66,3 +66,8 @@ std::vector<Token> tokenize(const std::string& expression)
   }
   return tokens;
 }
+
+std::ostream& operator<<(std::ostream& ostream, const Expression& expression)
+{
+  return ostream << expression.to_string();
+}

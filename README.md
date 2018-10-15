@@ -2,6 +2,8 @@
 
 An implementation of the [Shunting Yard Algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm) in C++.
 
+Currently it can be used to convert a mathematical expression from infix notation to postfix notation. More features to come.
+
 ## Build
 
 ```bash
@@ -10,6 +12,27 @@ make
 
 ## Usage
 
-```bash
-./sya '1 + 2 - (3 * 4) / 5 ^ 6'
+```
+sya - An implementation of the Shunting Yard algorithm.
+
+Usage:
+  sya [expression]
+
+Mandatory Arguments:
+  expression    A quoted mathematical expression.
+
+Options:
+ -h, --help:    Show this help screen.
+ -v, --version: Show the version.
+
+Supported Operators:
+ + Add
+ - Subtract
+ * Multiply
+ / Divide
+ ^ Exponent
+ ( Left Bracket
+ ) Right Bracket
+
+Example:  sya '1 + 2 * ( 3 / 4 ) ^ 5'
 ```

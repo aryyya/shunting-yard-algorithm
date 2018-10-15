@@ -16,24 +16,33 @@ int main(int argc, char *argv[])
   Expression expression(argv[1]);
   Expression expression_postfix = expression.to_postfix();
 
-  std::cout << "ifix: " << expression.to_string() << "\n";
-  std::cout << "pfix: " << expression_postfix.to_string() << "\n";
+  std::cout << expression_postfix << "\n";
 }
 
 void show_not_enough_arguments_error()
 {
-  std::cerr << "Error: Not enough arguments.\n";
-  std::cerr << "Try `sya --help` for usage instructions.\n";
+  std::cerr
+    << "Error: Not enough arguments.\n"
+    << "Try `sya --help` for usage instructions.\n"
+    << "\n";
   std::exit(-1);
 }
 
 void show_help()
 {
   std::cout
-    << "Usage: sya [Expression]\n"
-    << "Option Flags:\n"
+    << "sya - An implementation of the Shunting Yard algorithm.\n"
+    << "\n"
+    << "Usage:\n"
+    << "  sya [expression]\n"
+    << "\n"
+    << "Mandatory Arguments:\n"
+    << "  expression    A quoted mathematical expression.\n"
+    << "\n"
+    << "Options:\n"
     << " -h, --help:    Show this help screen.\n"
     << " -v, --version: Show the version.\n"
+    << "\n"
     << "Supported Operators:\n"
     << " + Add\n"
     << " - Subtract\n"
@@ -41,7 +50,11 @@ void show_help()
     << " / Divide\n"
     << " ^ Exponent\n"
     << " ( Left Bracket\n"
-    << " ) Right Bracket\n";
+    << " ) Right Bracket\n"
+    << "\n"
+    << "Example:"
+    << "  sya '1 + 2 * ( 3 / 4 ) ^ 5'\n"
+    << "\n";
   std::exit(0);
 }
 
