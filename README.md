@@ -45,6 +45,6 @@ Example:
 - [x] Operator abstraction as subclass of Token.
 - [x] Number abstraction as subclass of Token.
 - [x] Shunting Yard infix to postfix conversion.
-- [ ] Input sanitization and error handler.
+- [ ] Input sanitizer and error handler.
 - [ ] Postfix expression solver.
 - [ ] Interactive mode.
