@@ -12,6 +12,8 @@ void handle_number(const Number&, std::queue<Token>&);
 void handle_operator(const Operator&, std::queue<Token>&, std::stack<Operator>&);
 void handle_opening_bracket(const Operator&, std::stack<Operator>&);
 void handle_closing_bracket(std::queue<Token>&, std::stack<Operator>&);
+void print_output_queue(const std::queue<Token>&);
+void print_operator_stack(const std::stack<Operator>&);
 
 Expression shunting_yard(const Expression& expression)
 {
@@ -57,31 +59,39 @@ void handle_operator(
   std::queue<Token>& output_queue,
   std::stack<Operator>& operator_stack)
 {
-  if (operator_.is_opening_bracket())
+  const bool operator_is_opening_bracket = operator_.is_opening_bracket();
+  const bool operator_is_closing_bracket = operator_.is_closing_bracket();
+
+  if (!operator_is_opening_bracket && !operator_is_closing_bracket)
+  {
+    if (!operator_stack.empty())
+    {
+      Operator stack_operator = operator_stack.top();
+      while (!operator_stack.empty()
+          && (stack_operator > operator_
+          || ((stack_operator == operator_ && stack_operator.is_left_associative())
+          && !stack_operator.is_opening_bracket())))
+      {
+        output_queue.push(stack_operator);
+        operator_stack.pop();
+        if (!operator_stack.empty())
+        {
+          stack_operator = operator_stack.top();
+        }
+      }
+    }
+    operator_stack.push(operator_);
+  }
+
+  else if (operator_is_opening_bracket)
   {
     handle_opening_bracket(operator_, operator_stack);
-    return;
   }
 
-  else if (operator_.is_closing_bracket())
+  else if (operator_is_closing_bracket)
   {
-    handle_closing_bracket(output_queue, operator_stack);\
-    return;
+    handle_closing_bracket(output_queue, operator_stack);
   }
-
-  else if (!operator_stack.empty())
-  {
-    Operator stack_operator = operator_stack.top();
-    while (!operator_stack.empty()
-        && (stack_operator > operator_
-        || ((stack_operator == operator_ && stack_operator.is_left_associative())
-        && !stack_operator.is_opening_bracket())))
-    {
-      output_queue.push(stack_operator);
-      operator_stack.pop();
-    }
-  }
-  operator_stack.push(operator_);
 }
 
 void handle_opening_bracket(
