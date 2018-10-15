@@ -38,7 +38,7 @@ std::string Expression::to_string() const
 
 Expression Expression::to_postfix() const
 {
-  return shunting_yard(Expression(to_string()));
+  return shunting_yard(to_string());
 }
 
 double Expression::solve() const
@@ -59,7 +59,10 @@ std::vector<Token> tokenize(const std::string& expression)
   {
     std::string token = "";
     expression_stream >> token;
-    tokens.push_back(Token(token));
+    if (token.length() > 0)
+    {
+      tokens.push_back(token);
+    }
   }
   return tokens;
 }
