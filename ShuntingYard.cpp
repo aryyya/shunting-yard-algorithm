@@ -2,18 +2,51 @@
 #include "Expression.hpp"
 #include "Token.hpp"
 #include "Operator.hpp"
+#include "Number.hpp"
 
 #include <iostream>
 #include <stack>
 #include <queue>
 
-void handle_number(const Token&, std::queue<Token>&);
+void handle_number(const Number&, std::queue<Token>&);
 void handle_operator(const Operator&, std::queue<Token>&, std::stack<Operator>&);
 void handle_opening_bracket(const Operator&, std::stack<Operator>&);
 void handle_closing_bracket(std::queue<Token>&, std::stack<Operator>&);
 
+Expression shunting_yard(const Expression& expression)
+{
+  std::queue<Token> output_queue;
+  std::stack<Operator> operator_stack;
+
+  for (const Token& token : expression.get_tokens())
+  {
+    if (Number::is_number(token))
+    {
+      handle_number(token, output_queue);
+    }
+
+    else if (Operator::is_operator(token))
+    {
+      handle_operator(token, output_queue, operator_stack);
+    }
+
+    std::cout << "token: " << token.to_string() << "\n";
+    print_output_queue(output_queue);
+    print_operator_stack(operator_stack);
+    std::cout << "\n";
+  }
+
+  while (!operator_stack.empty())
+  {
+    output_queue.push(operator_stack.top());
+    operator_stack.pop();
+  }
+
+  return output_queue;
+}
+
 void handle_number(
-  const Token& number,
+  const Number& number,
   std::queue<Token>& output_queue)
 {
   output_queue.push(number);
@@ -27,11 +60,13 @@ void handle_operator(
   if (operator_.is_opening_bracket())
   {
     handle_opening_bracket(operator_, operator_stack);
+    return;
   }
 
   else if (operator_.is_closing_bracket())
   {
-    handle_closing_bracket(output_queue, operator_stack);
+    handle_closing_bracket(output_queue, operator_stack);\
+    return;
   }
 
   else if (!operator_stack.empty())
@@ -40,13 +75,13 @@ void handle_operator(
     while (!operator_stack.empty()
         && (stack_operator > operator_
         || ((stack_operator == operator_ && stack_operator.is_left_associative())
-        && !stack_operator.is_left_bracket())))
+        && !stack_operator.is_opening_bracket())))
     {
       output_queue.push(stack_operator);
       operator_stack.pop();
     }
-    operator_stack.push(operator_);
   }
+  operator_stack.push(operator_);
 }
 
 void handle_opening_bracket(
@@ -102,36 +137,4 @@ void print_operator_stack(const std::stack<Operator>& operator_stack)
     operator_stack_copy.pop();
   }
   std::cout << "\n";
-}
-
-Expression shunting_yard(const Expression& expression)
-{
-  std::queue<Token> output_queue;
-  std::stack<Operator> operator_stack;
-
-  for (const Token& token : expression.get_tokens())
-  {
-    std::cout << "token: " << token.to_string() << "\n";
-    print_output_queue(output_queue);
-    print_operator_stack(operator_stack);
-    std::cout << "\n";
-
-    if (Operator::is_operator(token))
-    {
-      handle_operator(token, output_queue, operator_stack);
-    }
-
-    else if (true)
-    {
-      handle_number(token, output_queue);
-    }
-  }
-
-  while (!operator_stack.empty())
-  {
-    output_queue.push(operator_stack.top());
-    operator_stack.pop();
-  }
-
-  return output_queue;
 }

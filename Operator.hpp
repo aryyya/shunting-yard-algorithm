@@ -28,8 +28,8 @@ public:
   bool is_left_associative() const;
   bool is_right_associative() const;
   int get_precedence() const;
-  bool is_left_bracket() const;
-  bool is_right_bracket() const;
+  bool is_opening_bracket() const;
+  bool is_closing_bracket() const;
 };
 
 bool operator==(const Operator& operator1, const Operator& operator2);

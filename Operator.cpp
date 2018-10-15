@@ -98,11 +98,11 @@ int Operator::get_precedence() const
   return characteristics.precedence;
 }
 
-bool Operator::is_left_bracket() const
+bool Operator::is_opening_bracket() const
 {
   return characteristics.symbol == "(";
 }
-bool Operator::is_right_bracket() const
+bool Operator::is_closing_bracket() const
 {
   return characteristics.symbol == ")";
 }
