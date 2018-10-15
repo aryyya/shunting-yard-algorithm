@@ -16,3 +16,8 @@ const std::string& Token::to_string() const
 {
   return symbols;
 }
+
+std::ostream& operator<<(std::ostream& ostream, const Token& token)
+{
+  return ostream << token.to_string();
+}

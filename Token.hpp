@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <ostream>
 
 class Token
 {
@@ -12,3 +13,5 @@ public:
   Token(const Token& token);
   const std::string& to_string() const;
 };
+
+std::ostream& operator<<(std::ostream& ostream, const Token& token);
