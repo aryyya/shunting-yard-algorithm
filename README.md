@@ -19,20 +19,20 @@ Usage:
   sya [expression]
 
 Mandatory Arguments:
-  expression    A quoted mathematical expression.
+  expression                  A quoted mathematical expression.
 
 Options:
- -h, --help:    Show this help screen.
- -v, --version: Show the version.
+ -h, --help                   Show this help screen.
+ -v, --version                Show the version.
 
 Supported Operators:
- + Add
- - Subtract
- * Multiply
- / Divide
- ^ Exponent
- ( Left Bracket
- ) Right Bracket
+ +                            Add.
+ -                            Subtract.
+ *                            Multiply.
+ /                            Divide.
+ ^                            Exponent.
+ (                            Left Bracket.
+ )                            Right Bracket.
 
 Example:
   sya '1 + 2 * ( 3 / 4 ) ^ 5'
